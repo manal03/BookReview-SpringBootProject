@@ -1,12 +1,11 @@
 package com.example.demo.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import jakarta.persistence.*;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity 
 public class Book {
+    @JsonManagedReference
     @Id // indicates a primary key (id is always unique)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //let the ID be generated uniquely 
     private int id;
@@ -14,8 +13,16 @@ public class Book {
     private String author;
     private String genre; 
 
-    public Book() {
+    public Book() {}
+
+    public Book(String title, String author, String genre) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
     }
+    //A book can have many reviews 
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
     public int getId() {
         return id;
@@ -48,6 +55,9 @@ public class Book {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+    public List<Review> getReviews() { return reviews; }
+    public void setReviews(List<Review> reviews) { this.reviews = reviews; }
 }
 
 
