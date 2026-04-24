@@ -37,4 +37,14 @@ public class BookService {
         review.setBook(book);
         return reviewRepository.save(review);
     }
+
+
+     public void deleteBook(int id) {
+        if (!bookRepository.existsById(id)) {
+            throw new RuntimeException("Book not found");
+        }
+        bookRepository.deleteById(id);
+    }
+
 }
+

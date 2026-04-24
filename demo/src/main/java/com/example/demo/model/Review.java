@@ -1,22 +1,19 @@
 package com.example.demo.model;
 import jakarta.persistence.*;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity 
 public class Review {
-    @JsonManagedReference
     @Id // indicates a primary key (id is always unique)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //let the ID be generated uniquely 
     private int id;
     private String comment;
-    private int rating;
+    private double rating;
 
     public Review() {}
 
-    public Review(String comment, int rating) {
+    public Review(String comment, double rating) {
         this.comment = comment;
         this.rating = rating;
     }
@@ -42,11 +39,11 @@ public class Review {
         this.comment = comment;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

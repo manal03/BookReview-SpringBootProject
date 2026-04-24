@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity 
 public class Book {
-    @JsonManagedReference
     @Id // indicates a primary key (id is always unique)
     @GeneratedValue(strategy = GenerationType.IDENTITY) //let the ID be generated uniquely 
     private int id;
@@ -22,6 +21,7 @@ public class Book {
     }
     //A book can have many reviews 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review> reviews;
 
     public int getId() {

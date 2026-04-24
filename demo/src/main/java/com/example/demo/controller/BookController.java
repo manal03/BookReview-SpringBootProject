@@ -32,6 +32,12 @@ public class BookController {
         return bookService.createBook(book);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable int id) {
+        bookService.deleteBook(id);
+    }
+
+
     @PostMapping("/{bookId}/reviews")
     public Review addReview(@PathVariable int bookId, @RequestBody Review review) {
         return bookService.addReview(bookId, review);
