@@ -1,20 +1,26 @@
-import AddBook from "./components/books/AddBook";
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import BookList from "./components/books/BookList";
+import AddBook from "./components/books/AddBook";
+import StatsPage from "./components/stats/StatsPage";
 import Navbar from "./components/Navbar";
-import { useRef } from "react";
 
 function App() {
-  const listRef = useRef();
+
 
   return (
-    <div>
+    <Router>
       <Navbar />
-      <h1>Book App</h1>
 
-      <AddBook onBookAdded={() => listRef.current.fetchBooks()} />
+      <Routes>
+        <Route path="/" element={<AddBook/>} />
+        <Route path="/books" element={<BookList />} />
+        <Route path="/add" element={<AddBook />} />
+        <Route path="/stats" element={<StatsPage />} />
+      </Routes>
 
-      <BookList ref={listRef} />
-    </div>
+      
+    </Router>
   );
 }
 

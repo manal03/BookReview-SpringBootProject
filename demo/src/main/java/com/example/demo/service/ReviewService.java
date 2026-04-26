@@ -2,12 +2,18 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.Review;
+import com.example.demo.model.Book;
 import com.example.demo.repository.ReviewRepository;
+import com.example.demo.repository.BookRepository;
+import java.util.List;
 
 @Service
 public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
 
      // 🔹 Delete review
@@ -28,5 +34,16 @@ public class ReviewService {
 
         return reviewRepository.save(review);
     }
-    
+    public List<Review> getReviewsByBook(int bookId) {
+        return reviewRepository.findByBookId(bookId);
+    }
+
+    // 🔹 Add review to a book
+    public Review addReview(int bookId, Review review) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+        
+        review.setBook(book);
+        return reviewRepository.save(review);
+    }
 }

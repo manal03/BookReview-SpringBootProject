@@ -7,31 +7,59 @@ function AddBook({ onBookAdded }) {
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [recentBooks, setRecentBooks] = useState([]);
 
-  const handleSubmit = (e) => {
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "bookreview"); // from Cloudinary
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/_/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await res.json();
+    return data.secure_url;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newBook = { title, author };
+    let imageUrlToSend = "";
+        if (imageUrl) {
+      imageUrlToSend = await uploadImage(imageUrl);
+    }
+
+    const newBook = { title, author, genre, imageUrl: imageUrlToSend };
 
     createBook(newBook)
       .then((res) => {
         console.log("Book added:", res.data);
-
+        setRecentBooks((prev) => {
+        const updated = [res.data, ...prev];
+        return updated.slice(0, 3);
+         });
         // clear form
         setTitle("");
         setAuthor("");
         setGenre("");
         setImageUrl("");
 
+       
         // refresh list (important)
         if (onBookAdded) {
-          onBookAdded();
+          onBookAdded(res.data);
         }
       })
       .catch((err) => console.error(err));
   };
 
   return (
+    <div>
     <div className="form-container">
       <h2>Add A Book</h2>
 
@@ -65,8 +93,32 @@ function AddBook({ onBookAdded }) {
 
         <button type="submit">Add Book</button>
       </form>
+
     </div>
+    
+        <div style={{ padding: "20px" }}>
+  <h2>Recently Added</h2>
+
+  {recentBooks.length === 0 ? (
+    <p>No recent books</p>
+  ) : (
+    recentBooks.map((book, index) => (
+      <div key={index} style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+        {book.imageUrl && (
+          <img src={book.imageUrl} alt={book.title} width="80" />
+        )}
+        <p>{book.title} - {book.author}</p>
+      </div>
+      
+    ))
+  )}
+</div>
+</div>
+
+    
   );
+
+
 }
 
 export default AddBook;

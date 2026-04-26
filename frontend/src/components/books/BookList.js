@@ -1,5 +1,7 @@
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { getBooks } from "../../services/bookService";
+import BookItem from "./BookItem";
+import "./BookList.css"
 
 const BookList = forwardRef((props, ref) => {
   const [books, setBooks] = useState([]);
@@ -27,14 +29,14 @@ const BookList = forwardRef((props, ref) => {
       {books.length === 0 ? (
         <p>No books found</p>
       ) : (
-        books.map((book) => (
-          <div key={book.id}>
-            <p>{book.title} - {book.author}</p>
-          </div>
-        ))
+        <div className="books-container">
+          {books.map((book) => (
+            <BookItem key={book.id} book={book} />
+          ))}
+        </div>
       )}
     </div>
   );
-}); // ✅ THIS was missing
+}); 
 
 export default BookList;

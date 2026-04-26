@@ -30,5 +30,14 @@ public class ReviewController {
     public Review updateReview(@PathVariable int id, @RequestBody Review review) {
         return reviewService.updateReview(id, review);
     }
-    
+
+    @PostMapping("/book/{bookId}")
+    public Review addReview(@PathVariable int bookId, @RequestBody Review review) {
+        return reviewService.addReview(bookId, review);
+    }
+
+    @GetMapping("/book/{bookId}")
+    public List<Review> getReviewsByBook(@PathVariable int bookId) {
+        return reviewService.getReviewsByBook(bookId);
+    }
 }

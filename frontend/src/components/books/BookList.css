@@ -1,0 +1,20 @@
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .books-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .books-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

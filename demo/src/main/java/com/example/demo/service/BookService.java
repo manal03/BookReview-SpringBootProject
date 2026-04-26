@@ -3,9 +3,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.Book;
 import com.example.demo.model.Review;
-
 import java.util.List;
-
 import com.example.demo.repository.*;;
 
 @Service
