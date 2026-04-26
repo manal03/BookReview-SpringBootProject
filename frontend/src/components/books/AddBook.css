@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Modak&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+h2 {
+  font-family: "Modak", serif;
+  font-size: 60px;
+  font-style: normal;
+  margin-bottom: 20px;
+    font-weight: 100;
+  color: #DE5D83;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+  font-family: "Roboto", sans-serif;
+  background-color: white;
+  padding: 5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input {
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: white;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #c71585;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-family: "Modak", serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #FFB6C1;
+    color: white; 
+}

@@ -11,13 +11,15 @@ public class Book {
     private String title;
     private String author;
     private String genre; 
+    private String imageUrl;
 
     public Book() {}
 
-    public Book(String title, String author, String genre) {
+    public Book(String title, String author, String genre, String imageUrl) {
         this.title = title;
         this.author = author;
         this.genre = genre;
+        this.imageUrl = imageUrl;
     }
     //A book can have many reviews 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
@@ -54,6 +56,14 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public List<Review> getReviews() { return reviews; }
