@@ -31,7 +31,7 @@ const BookList = forwardRef((props, ref) => {
       ) : (
         <div className="books-container">
           {books.map((book) => (
-            <BookItem key={book.id} book={book} />
+            <BookItem key={book.id} book={book} onBookUpdate={fetchBooks} />
           ))}
         </div>
       )}

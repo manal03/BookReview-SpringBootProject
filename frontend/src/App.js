@@ -4,6 +4,9 @@ import BookList from "./components/books/BookList";
 import AddBook from "./components/books/AddBook";
 import StatsPage from "./components/stats/StatsPage";
 import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
 
@@ -13,12 +16,38 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<AddBook/>} />
-        <Route path="/books" element={<BookList />} />
-        <Route path="/add" element={<AddBook />} />
-        <Route path="/stats" element={<StatsPage />} />
-      </Routes>
+  <Route path="/" element={<AddBook />} />
 
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+
+  <Route
+    path="/books"
+    element={
+      <ProtectedRoute>
+        <BookList />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/add"
+    element={
+      <ProtectedRoute>
+        <AddBook />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/stats"
+    element={
+      <ProtectedRoute>
+        <StatsPage />
+      </ProtectedRoute>
+    }
+  />
+</Routes>
       
     </Router>
   );

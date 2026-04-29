@@ -43,7 +43,6 @@ function AddBook({ onBookAdded }) {
         const updated = [res.data, ...prev];
         return updated.slice(0, 3);
          });
-        // clear form
         setTitle("");
         setAuthor("");
         setGenre("");

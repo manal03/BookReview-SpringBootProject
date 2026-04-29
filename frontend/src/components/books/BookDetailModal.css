@@ -201,6 +201,109 @@
   cursor: not-allowed;
 }
 
+/* Book Actions */
+.book-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.book-actions button {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Roboto", sans-serif;
+}
+
+.book-actions button:first-child {
+  background-color: #DE5D83;
+  color: white;
+}
+
+.book-actions button:first-child:hover {
+  background-color: #c94a6f;
+}
+
+.book-actions button:last-child {
+  background-color: #f0f0f0;
+  color: #d32f2f;
+}
+
+.book-actions button:last-child:hover {
+  background-color: #e0e0e0;
+}
+
+/* Edit Form */
+.edit-form {
+  width: 100%;
+}
+
+.edit-form .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.edit-form input:focus {
+  outline: none;
+  border-color: #DE5D83;
+  box-shadow: 0 0 0 3px rgba(222, 93, 131, 0.1);
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Roboto", sans-serif;
+}
+
+.save-btn {
+  background-color: #DE5D83;
+  color: white;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #c94a6f;
+}
+
+.save-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background-color: #e0e0e0;
+}
+
 @media (max-width: 600px) {
   .modal-content {
     max-width: 95vw;

@@ -13,6 +13,10 @@ public class Book {
     private String genre; 
     private String imageUrl;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user; 
+
     public Book() {}
 
     public Book(String title, String author, String genre, String imageUrl) {
@@ -65,6 +69,14 @@ public class Book {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
 
     public List<Review> getReviews() { return reviews; }
     public void setReviews(List<Review> reviews) { this.reviews = reviews; }

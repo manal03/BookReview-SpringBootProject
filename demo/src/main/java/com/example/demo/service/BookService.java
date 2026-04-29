@@ -1,8 +1,11 @@
 package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.example.demo.model.Book;
 import com.example.demo.model.Review;
+import com.example.demo.model.User;
+
 import java.util.List;
 import com.example.demo.repository.*;;
 
@@ -15,8 +18,13 @@ public class BookService {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        return bookRepository.findByUser(user);
     }
 
     public Book getBookById(int id) {
@@ -25,6 +33,9 @@ public class BookService {
     }
 
     public Book createBook(Book book) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        book.setUser(user);
         return bookRepository.save(book);
     }
 
@@ -38,11 +49,19 @@ public class BookService {
 
 
      public void deleteBook(int id) {
-        if (!bookRepository.existsById(id)) {
-            throw new RuntimeException("Book not found");
+        Book book = bookRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Book not found"));
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!book.getUser().getUsername().equals(username)) {
+        throw new RuntimeException("Not authorized");
         }
-        bookRepository.deleteById(id);
+
+        bookRepository.delete(book);
     }
+
+
+    
+    
 
 }
 
